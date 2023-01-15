@@ -1,0 +1,7 @@
+https://atcoder.jp/contests/arc153/editorial/5484
+
+ACできなかった
+
+
+２次元の操作を行と列で分けて、2つの１次元の問題に分けることが重要だった。
+https://atcoder.jp/contests/arc153/editorial/5484
