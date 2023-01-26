@@ -13,9 +13,6 @@ def f(x):
 
     return (pow_2, pow_3, x)
          
-
-
-
 n = int(input())
 
 pow_2_list = []
