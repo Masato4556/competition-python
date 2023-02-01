@@ -1,6 +1,5 @@
 import subprocess
 import os
-import time
 
 def generate_testfile_list():
     input_files = set(os.listdir("testcases/input"))
@@ -10,7 +9,7 @@ def generate_testfile_list():
     testcases.sort()
     return testcases
 
-def print_result(testfile, result, expected, error, run_time):
+def print_result(testfile, result, expected, error):
     print("== {} ==".format(testfile))
     if error:
         print("Error!")
@@ -19,9 +18,7 @@ def print_result(testfile, result, expected, error, run_time):
         return
 
     if (result == expected):
-        print("Success!")
-        print("実行時間: {}秒".format(run_time))
-        print()
+        print("Success!\n")
     else:
         print("Failure!")
         print("<result>")
@@ -36,15 +33,12 @@ if __name__ == '__main__':
     total_result = True
     for testfile in testfiles:
         with open('./testcases/input/{}'.format(testfile), 'r') as f:
-            start = time.perf_counter()
             result = subprocess.run(["python3", "answer.py"], stdin=f, capture_output=True, text=True)
-            end = time.perf_counter()
             output = result.stdout
             error = result.stderr
         expected = subprocess.run(["cat", "./testcases/output/{}".format(testfile)], capture_output=True, text=True).stdout
-        run_time = end - start
         
-        print_result(testfile, output, expected, error, run_time)
+        print_result(testfile, output, expected, error)
         total_result &= output == expected
 
     print("~~~~~~~~~~~~")
