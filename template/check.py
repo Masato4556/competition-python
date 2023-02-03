@@ -50,4 +50,3 @@ if __name__ == '__main__':
     print("~~~~~~~~~~~~")
     print("Total Result")
     print("Success!" if total_result else "Failure!")
-        
