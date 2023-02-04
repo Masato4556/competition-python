@@ -1,16 +1,14 @@
-from collections import defaultdict
 n = int(input())
 A = list(map(int, input().split()))
-uniq_A = list(set(A))
-uniq_A.sort()
-l = len(uniq_A)
-result = defaultdict(int)
+
+depth_list = [-1 for _ in range(2*n + 1)]
+depth_list[0] = 0
 
 for i in range(n):
-    result[l - (uniq_A.index(A[i]) + 1)] += 1
+    depth_list[2*(i+1) - 1] = depth_list[A[i]-1] + 1
+    depth_list[2*(i+1)] = depth_list[A[i]-1] + 1
 
-for i in range(n):
-    if i > l:
-        print(0)
+for depth in depth_list:
+    if depth == -1:
         continue
-    print(result[i])
+    print(depth)
