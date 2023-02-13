@@ -25,7 +25,7 @@ class bfs:
 
         return (par, dist)
 
-    def find_shortest_path(this, x, y): # 最短経路を求める
+    def find_shortest_path(this, x, y): # x->yの最短経路を求める
         par, dist = this.generate_par_and_dist(x)
 
         path = []
