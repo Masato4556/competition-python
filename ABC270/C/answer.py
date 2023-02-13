@@ -40,15 +40,19 @@ class bfs:
         path.reverse()
         return (path, dist[y])
 
+n, x, y = map(int, input().split())
+x -= 1
+y -= 1
 
-# 到達可能かを調べる
+G = [[] for _ in range(n)]
+for _ in range(n-1):
+    u, v = map(int, input().split())
+    u -= 1
+    v -= 1
+    G[u].append(v)
+    G[v].append(u)
 
-# 最長経路を求める
+b = bfs(n, G)
+path, _ = b.find_shortest_path(x, y)
 
-# 経路復元
-
-# 二部グラフ判定
-
-# トポロジカルソート
-
-# サイクル検出
+print(" ".join([str(v+1) for v in path]))
