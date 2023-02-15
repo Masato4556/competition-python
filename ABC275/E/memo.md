@@ -1,0 +1,1 @@
+https://note.com/rokikku/n/n81e18ef627a8
