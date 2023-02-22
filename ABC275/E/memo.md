@@ -1,1 +1,5 @@
-https://note.com/rokikku/n/n81e18ef627a8
+自力で解けなかったが、方針は合っていた。
+できていなかったのは、確率 mod 998244353 の扱い周りなので、自分の合同式の理解を深める必要がある。
+
+下記回答を参考に手直しして提出した。
+https://atcoder.jp/contests/abc275/submissions/39094499
