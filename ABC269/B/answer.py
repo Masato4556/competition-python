@@ -1,4 +1,3 @@
-
 a, b, c, d = 0, 0, 0, 0
 
 S = [input() for _ in range(10)]
