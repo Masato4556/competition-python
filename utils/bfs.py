@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class bfs:
     def __init__(this, n, g):
         this.n = n
@@ -13,8 +14,8 @@ class bfs:
         par = [-1] * this.n
         par[x] = this.root_par
         dist = [-1] * this.n
-        dist[x] = 0 
-        
+        dist[x] = 0
+
         while len(que):
             v = que.popleft()
             for next_v in this.g[v]:
