@@ -2,25 +2,22 @@ from collections import defaultdict
 n = int(input())
 
 cards = []
-counter = defaultdict(int)
 for _ in range(n):
     a, b = map(int, input().split())
     cards.append([a, b])
-    counter[a] += 1
-    counter[b] += 1
 
-r = 0
-for i in range(2 ** n):
-    prev = -1
-    for j in range(n):
-        if (1 << j) & i:
-            curr = cards[j][0]
-        else:
-            curr = cards[j][1]
+dp = [[0, 0] for _ in range(n)]
+dp[0] = [1, 1]
 
-        if curr == prev:
-            r += 1
-            break
-        prev = curr
+for i in range(1, n):
+    for prev in range(2):
+        prev_num = cards[i-1][prev]
+        for curr in range(2):
+            curr_num = cards[i][curr]
+            if prev_num == curr_num: continue
 
-print(((2 ** n) - r) % 998244353)
+            dp[i][curr] +=  dp[i-1][prev]
+    dp[i][0] %= 998244353  
+    dp[i][1] %= 998244353 
+
+print((dp[-1][0] + dp[-1][1]) % 998244353)
