@@ -4,8 +4,6 @@
 ダイクストラ法より低速だが、負のコストを持つ辺があっても利用可能。
 '''
 
-
-
 class Edge {
     def __init__(this, start, end, weight):
         this.start = start
