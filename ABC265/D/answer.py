@@ -18,7 +18,6 @@ def binary_search(S, start, target):
             right = mid - 1
     return -1
 
-
 n, p, q, r = map(int, input().split())
 targets = [p, q, r]
 A = list(map(int, input().split()))
