@@ -48,7 +48,7 @@ def topological_sort(G, in_degs):
             in_degs[adj] -= 1 
             if in_degs[adj]==0: # 入次数が0になったら、キューに入れる
                 que.append(adj)
-     
+
     has_cycles = len(order) != n # サイクルが存在する場合、
     return (order, is_sorted_uniquely, has_cycles)
 
