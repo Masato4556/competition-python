@@ -24,7 +24,7 @@ def bellman_ford(start, n, edges):
 
         if not update: # 最小コストが更新されなかったら終了
             break
-        
+
         if i == n - 1: # 負閉路が存在
             return -1
     return d
@@ -39,4 +39,4 @@ for _ in range(m):
 
 print(bellman_ford(0, n, edges))
 
-# TODO: ちゃんと動くか確認する。
+# 経路復元したい場合、親ノードを格納する配列を用意する

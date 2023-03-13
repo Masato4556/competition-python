@@ -38,14 +38,14 @@ def topological_sort(G, in_degs):
     for i in range(n):
         if in_degs[i]==0:
             que.append(i)
-    
+
     order = []
     while que:
         if len(que) > 1: is_sorted_uniquely = False
         v = que.popleft()
         order.append(v)
         for adj in G[v]:
-            in_degs[adj] -= 1 
+            in_degs[adj] -= 1
             if in_degs[adj]==0: # 入次数が0になったら、キューに入れる
                 que.append(adj)
 

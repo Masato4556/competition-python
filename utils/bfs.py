@@ -1,55 +1,46 @@
 from collections import deque
 
-
-class bfs:
-    def __init__(this, n, g):
-        this.n = n
-        this.g = g
-
-        this.root_par = -2
-
-    def generate_par_and_dist(this, root):
-        que = deque([x])
-
-        par = [-1] * this.n
-        par[x] = this.root_par
-        dist = [-1] * this.n
-        dist[x] = 0
-
-        while len(que):
-            v = que.popleft()
-            for next_v in this.g[v]:
-                if par[next_v] != -1 or par[next_v] == this.root_par: continue
-                par[next_v] = v
-                dist[next_v] = dist[v] + 1
-                que.append(next_v)
-
-        return (par, dist)
-
-    def find_shortest_path(this, x, y): # x->yの最短経路を求める
-        par, dist = this.generate_par_and_dist(x)
-
-        path = []
-        path.append(y)
-        t = y
-        for _ in range(n):
-            if par[t] == this.root_par:
-                break
-            path.append(par[t])
-            t = par[t]
-
-        path.reverse()
-        return (path, dist[y])
-
-
 # 到達可能かを調べる
+def bfs(graph, start):
+    # 訪問済みのノードを管理するための集合
+    visited = set()
+    # 訪問予定のノードを管理するためのキュー
+    queue = deque([start])
 
-# 最長経路を求める
+    while queue:
+        # キューの先頭からノードを取り出す
+        node = queue.popleft()
+        # 取り出したノードが訪問済みでなければ、訪問済みにする
+        if node not in visited:
+            visited.add(node)
+            # 取り出したノードに隣接するノードをキューに追加する
+            queue.extend(graph[node] - visited)
 
-# 経路復元
+    # 訪問済みのノードを返す
+    return visited
+
+# 幅優先探索により最短経路を求める関数
+def bfs_shortest_path(graph, start, end):
+    # 各ノードについて、そこまでの最短経路の長さを保持するための辞書
+    shortest_path = {start: [start]}
+    # キューに開始ノードを追加する
+    queue = deque([start])
+
+    # キューが空になるまで探索を続ける
+    while queue:
+        # キューの先頭からノードを取り出す
+        current = queue.popleft()
+        # 目的地に到達した場合、最短経路を返す
+        if current == end:
+            return shortest_path[current]
+        # 隣接するノードについて、まだ最短経路が決まっていなければ、最短経路を更新する
+        for neighbor in graph[current]:
+            if neighbor not in shortest_path:
+                shortest_path[neighbor] = shortest_path[current] + [neighbor]
+                queue.append(neighbor)
+
+    # 目的地に到達できなかった場合、Noneを返す
+    return None
+
 
 # 二部グラフ判定
-
-# トポロジカルソート
-
-# サイクル検出
