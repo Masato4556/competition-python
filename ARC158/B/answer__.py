@@ -1,10 +1,5 @@
-from fractions import Fraction
-
 def f(xi, xj, xk):
-    xi = Fraction(xi)
-    xj = Fraction(xj)
-    xk = Fraction(xk)
-    return float((xi + xj + xk) / (xi * xj * xk))
+    return (xi + xj + xk) / (xi * xj * xk)
 
 n = int(input())
 x = list(map(int, input().split()))
