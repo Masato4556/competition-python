@@ -4,16 +4,14 @@ import time
 
 
 def generate_testfile_list():
-    input_files = set(os.listdir("testcases/input"))
-    output_files = set(os.listdir("testcases/output"))
-
-    testcases = list(input_files & output_files)
-    testcases.sort()
+    input_files = set(os.listdir(os.path.join('testcases', 'input')))
+    output_files = set(os.listdir(os.path.join('testcases', 'output')))
+    testcases = sorted(input_files & output_files)
     return testcases
 
 
 def print_result(testfile, result, expected, error, run_time):
-    print("== {} ==".format(testfile))
+    print(f"== {testfile} ==")
     if error:
         print("Error!")
         print(error)
@@ -22,7 +20,7 @@ def print_result(testfile, result, expected, error, run_time):
 
     if (result == expected):
         print("Success!")
-        print("実行時間: {}秒".format(run_time))
+        print(f"実行時間: {run_time: .6f}秒")
         print()
     else:
         print("Failure!")
@@ -38,24 +36,26 @@ if __name__ == '__main__':
 
     total_result = True
     for testfile in testfiles:
-        with open('./testcases/input/{}'.format(testfile), 'r') as f:
+        input_path = os.path.join('testcases', 'input', testfile)
+        output_path = os.path.join('testcases', 'output', testfile)
+
+        with open(input_path, 'r') as f:
             start = time.perf_counter()
             result = subprocess.run(
                 ["python3", "answer.py"],
                 stdin=f,
                 capture_output=True,
-                text=True
+                text=True,
+                check=True
             )
             end = time.perf_counter()
             output = result.stdout
             error = result.stderr
-        expected = subprocess.run(
-            ["cat", "./testcases/output/{}".format(testfile)],
-            capture_output=True,
-            text=True
-        ).stdout
-        run_time = end - start
 
+        with open(output_path, 'r') as f:
+            expected = f.read()
+
+        run_time = end - start
         print_result(testfile, output, expected, error, run_time)
         total_result &= output == expected
 
