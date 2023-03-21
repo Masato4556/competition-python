@@ -13,7 +13,7 @@ def make_question_folder(contest, questions):
         shutil.copytree("./template", contest_dir + "/{}".format(q))
 
 
-parser = argparse.ArgumentParser(description='フォルダの作成') 
+parser = argparse.ArgumentParser(description='フォルダの作成')
 dt_now = datetime.datetime.now()
 parser.add_argument('-c', '--contest', default=dt_now.strftime('%Y%m%d%H%M%S'))
 parser.add_argument('-q', '--questions', nargs='*', default=["A", "B", "C", "D", "E", "F", "G", "H-Ex"])
@@ -21,6 +21,3 @@ parser.add_argument('-q', '--questions', nargs='*', default=["A", "B", "C", "D",
 args = parser.parse_args()
 make_contest_folder(args.contest)
 make_question_folder(args.contest, args.questions)
-
-
-

@@ -1,20 +1,22 @@
+import heapq
+from collections import deque
+N, Q = map(int, input().split())
 
-# string
-s = input()
+events = [list(map(int, input().split())) for _ in range(Q)]
 
-# int
-n = int(input())
+nums = deque([i+1 for i in range(N)])
+called_nums = []
+visited_nums = set()
 
-# list
-a = list(map(int, input().split()))
-
-# map
-n, m = map(int, input().split())
-
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+for e in events:
+    if e[0] == 1:
+        if len(nums) == 0: continue
+        heapq.heappush(called_nums, nums.popleft())
+    elif e[0] == 2:
+        visited_nums.add(e[1])
+    else:
+        while len(called_nums):
+            if called_nums[0] not in visited_nums:
+                print(called_nums[0])
+                break
+            heapq.heappop(called_nums)
