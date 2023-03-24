@@ -1,20 +1,33 @@
+L, N1, N2 = map(int, input().split())
 
-# string
-s = input()
+V1 = [list(map(int, input().split())) for _ in range(N1)]
+V2 = [list(map(int, input().split())) for _ in range(N2)]
 
-# int
-n = int(input())
+i1 = 0
+i2 = 0
 
-# list
-a = list(map(int, input().split()))
+cnt = 0
+while True:
+    if i1 >= N1 and i2 >= N2:
+        break
 
-# map
-n, m = map(int, input().split())
+    v1 = V1[i1]
+    v2 = V2[i2]
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+    if v1[1] > v2[1]:
+        c = v2[1]
+        v1[1] -= v2[1]
+        i2 += 1
+    elif v1[1] < v2[1]:
+        c = v1[1]
+        v2[1] -= v1[1]
+        i1 += 1
+    else:
+        c = v1[1]
+        i1 += 1
+        i2 += 1
+
+    if v1[0] == v2[0]:
+        cnt += c
+
+print(cnt)
