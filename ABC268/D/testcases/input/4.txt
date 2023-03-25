@@ -1,0 +1,11 @@
+8 2
+aa
+BG
+Cc
+Dd
+E
+F
+G
+H
+chokudai_atcoder
+atcoder_chokudai
