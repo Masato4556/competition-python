@@ -1,40 +1,21 @@
+from math import factorial
 from collections import defaultdict
-from itertools import combinations
 
 S = input()
+n = len(S)
+B = [0] * (n + 1)
 
+D = defaultdict(int)
+D[0] += 1
 
-def f(s):
-    n = len(s)
-    cnts = [[0] * 10 for _ in range(n+1)]
-
-    for i in range(n):
-        for j in range(10):
-            cnts[i+1][j] = cnts[i][j]
-        si = int(s[i])
-        cnts[i+1][si] += 1
-
-    return cnts
-
-
-def g(s, start, cnts):
-    n = len(s)
-    ok = set()
-    for i in range(start+1, n+1):
-        flag = 0
-        for j in range(10):
-            if (cnts[i][j] - cnts[start][j]) % 2 != 0: flag = 1
-        if flag: continue
-        ok.add(i)
-
-    return ok
-
-cnts = f(S)
-
+for i in range(n):
+    B[i+1] = B[i] ^ (1 << int(S[i]))
+    D[B[i+1]] += 1
 
 ans = 0
-for i in range(len(S)):
-    ok = g(S, i, cnts)
-    ans += len(ok)
+
+for v in D.values():
+    if v == 1: continue
+    ans += factorial(v) // (factorial(v-2) * factorial(2))
 
 print(ans)
