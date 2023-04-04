@@ -1,15 +1,32 @@
+# O(√N)
+def prime_factorize(n):
+    ret = set()
+    i = 2
+    while i**2 <= n:
+        e = 0
+        while n % i == 0:
+            n //= i
+            e += 1
+        if e > 0:
+            ret.add(i)
+        i += 1
+    if n > 1: 
+        ret.add(n)
+    return ret
 
-a, x, m = map(int, input().split())
 
+A, X, M = map(int, input().split())
+
+print(prime_factorize(A), X, prime_factorize(M))
+
+ans = 0
 t = 1
-cnt = 1
-bb = 1
-while True:
-    t *= a
-    t % m
-    print(t, t % m)
-    if t % m == 1 : break
-    cnt += 1
-    bb += t % m
+for _ in range(X):
+    ans += t % M
+    ans %= M 
+    t *= A
 
-print(cnt, bb)
+print(ans)
+exit()
+
+# if M % A
