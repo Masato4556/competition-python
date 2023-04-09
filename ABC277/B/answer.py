@@ -1,20 +1,19 @@
 
-# string
-s = input()
+N = int(input())
+S = [input() for _ in range(N)]
+S_set = set(S)
 
-# int
-n = int(input())
+if len(S) != len(S_set):
+    print("No")
+    exit()
 
-# list
-a = list(map(int, input().split()))
+first_validation = ("H", "D", "C", "S")
+second_validation = ("A" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "T" , "J" , "Q" , "K")
+for s in S:
+    if s[0] in first_validation and s[1] in second_validation: continue
 
-# map
-n, m = map(int, input().split())
+    print("No")
+    exit()
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print("Yes")
+
