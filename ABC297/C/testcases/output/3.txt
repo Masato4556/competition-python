@@ -1,0 +1,12 @@
+11 10
+..........
+.........T
+........PC
+.......PCT
+......PCPC
+.....PCPCT
+....PCPCPC
+...PCPCPCT
+..PCPCPCPC
+.PCPCPCPCT
+PCPCPCPCPC

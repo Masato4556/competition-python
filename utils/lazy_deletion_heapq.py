@@ -20,21 +20,25 @@ class LazyDeletionHeapq:
             heapq.heappop(self.deleted)
         return heapq.heappop(self.que)
 
+    def has_next(self):
+        while self.que and self.deleted and self.que[0] == self.deleted[0]:
+            heapq.heappop(self.que)
+            heapq.heappop(self.deleted)
+
+        return len(self.que) > 0
     def __str__(self):
         return str(self.que) + " DELETED: " + str(self.deleted)
 
-    def __len__(self):
-        return len(self.que) - len(self.deleted)
 
 
 ldh = LazyDeletionHeapq([1,6,3,5,9,12,17,12])
 
-print(ldh, len(ldh))
+print(ldh)
 print(ldh.pop())
-print(ldh, len(ldh))
+print(ldh)
 ldh.erase(9)
-print(ldh, len(ldh))
+print(ldh)
 
-while len(ldh):
+while ldh.has_next():
     print(ldh.pop())
-    print(ldh, len(ldh))
+    print(ldh)

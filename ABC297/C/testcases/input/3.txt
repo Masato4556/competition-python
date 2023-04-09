@@ -1,0 +1,12 @@
+11 10
+..........
+.........T
+........TT
+.......TTT
+......TTTT
+.....TTTTT
+....TTTTTT
+...TTTTTTT
+..TTTTTTTT
+.TTTTTTTTT
+TTTTTTTTTT
