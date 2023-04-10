@@ -1,20 +1,24 @@
+from collections import deque, defaultdict
 
-# string
-s = input()
+N = int(input())
 
-# int
-n = int(input())
+G = defaultdict(set)
+for _ in range(N):
+    a, b = map(int, input().split())
+    G[a].add(b)
+    G[b].add(a)
 
-# list
-a = list(map(int, input().split()))
+que = deque([1])
 
-# map
-n, m = map(int, input().split())
+seen = set()
+ans = 1
+while len(que):
+    v = que.popleft()
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+    for next_v in G[v]:
+        if next_v in seen: continue
+        seen.add(next_v)
+        que.append(next_v)
+        if next_v > ans: ans = next_v
+
+print(ans)
