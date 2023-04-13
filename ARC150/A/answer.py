@@ -24,4 +24,4 @@ for _ in range(T):
             ans += 1
 
     print("Yes" if ans == 1 else "No")
-        
+        /k/

@@ -1,20 +1,16 @@
+from math import ceil
 
-# string
-s = input()
+for _ in range(int(input())):
+    a, b = map(int, input().split())
 
-# int
-n = int(input())
 
-# list
-a = list(map(int, input().split()))
+    max_k = ceil(b/a)
 
-# map
-n, m = map(int, input().split())
+    ans = 10**18
+    for k in range(1, max_k + 1):
+        x = max(ceil(b / k) - a, 0)
+        y = k * (a + x) - b
+        if x+y < ans:
+            ans = x+y
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+    print(ans)
