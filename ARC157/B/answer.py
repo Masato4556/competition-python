@@ -5,13 +5,15 @@ S = list(input())
 
 x_num = S.count("X")
 
-if x_num == N:
-    print(K-1)
-    exit()
-
 if x_num < K:
     S = ["Y" if s == "X" else "X" for s in S]
     K = N - K
+
+x_num = S.count("X")
+
+if x_num == N:
+    print(K-1 if K != 0 else 0)
+    exit()
 
 x_cnt, y_cnt = 0, 0
 x_nums, y_nums = [], []
@@ -37,23 +39,17 @@ if S[-1] == "X": y_nums.append(0)
 
 c = []
 for i in range(len(x_nums)):
-    add = x_nums[i]
-    add += 1 if (y_nums[i] > 0) and (y_nums[i+1] > 0) else 0
-    heapq.heappush(c, (x_nums[i] * -1, add * -1))
+    add = -1 + int(y_nums[i] > 0) + int(y_nums[i+1] > 0)
+    heapq.heappush(c, (add * -1, x_nums[i]))
 
 
 ans = sum([y_num - 1 for y_num in y_nums if y_num > 0])
-print(c)
-while K > 0:
-    cost, add = heapq.heappop(c)
-    cost *= -1
+while len(c):
+    add, cost = heapq.heappop(c)
     add *= -1
     if cost <= K:
-        ans += add
+        ans += cost + add
         K -= cost
-    else:
-        ans += K
-        break
-
+ans += K
 print(ans)
 
