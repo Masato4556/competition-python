@@ -31,6 +31,7 @@ def print_result(testfile, result, expected, error, run_time):
         print("<expected>")
         print(expected)
         print("")
+        print("実行時間: {}秒".format(run_time))
 
 
 if __name__ == '__main__':

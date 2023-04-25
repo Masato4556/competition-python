@@ -1,20 +1,20 @@
 
-# string
-s = input()
 
-# int
-n = int(input())
+N, M = map(int, input().split())
+A = list(map(int, input().split()))
 
-# list
-a = list(map(int, input().split()))
+replaced = list(range(1, N+1))
+aa = [1] * M
+for i in range(M):
+    a = A[i]
+    if replaced[a-1] == 1:
+        aa[i] = replaced[a] 
+    elif replaced[a] == 1: 
+        aa[i] = replaced[a-1] 
+    
+    replaced[a-1], replaced[a] = replaced[a], replaced[a-1]
 
-# map
-n, m = map(int, input().split())
+num_to_ind = {v:i for i, v in enumerate(replaced)}
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+for i in range(M):
+    print(num_to_ind[aa[i]] + 1)
