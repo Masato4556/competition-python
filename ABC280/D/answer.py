@@ -1,20 +1,34 @@
+def prime_factorize(n):
+    ret = []
+    i = 2
+    while i**2 <= n:
+        e = 0
+        while n % i == 0:
+            n //= i
+            e += 1
+        if e > 0:
+            ret.append((i, e))
+        i += 1
+    if n > 1: 
+        ret.append((n, 1))
+    return ret
 
-# string
-s = input()
+def g(p, i):
+    multi = 0
+    while i > 0:
+        i -= 1
+        multi += 1
+        m = multi
+        while m % p == 0:
+            i -= 1
+            m //= p
+    return multi * p
 
-# int
-n = int(input())
 
-# list
-a = list(map(int, input().split()))
+K = int(input())
 
-# map
-n, m = map(int, input().split())
+ans = 1
+for p, i in prime_factorize(K):
+    ans = max(ans, g(p, i))
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print(ans)
