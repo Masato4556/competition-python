@@ -1,3 +1,10 @@
+'''
+最小値と最大値のを保持するset
+
+値の追加、削除を行いながら、最小値と最大値を取得したい場合に有効
+'''
+
+
 class MinMaxSet:
     def __init__(self, s=set()):
         self.s = s

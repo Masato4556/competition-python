@@ -1,5 +1,9 @@
 # 引用 https://qiita.com/wotsushi/items/c936838df992b706084c
 
+'''
+確率modや、期待値modを計算するときに利用する
+'''
+
 class ModInt:
     def __init__(self, x):
         self.x = x % MOD
