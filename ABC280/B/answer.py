@@ -1,20 +1,13 @@
 
-# string
-s = input()
+N = int(input())
+S = list(map(int, input().split()))
 
-# int
-n = int(input())
 
-# list
-a = list(map(int, input().split()))
+ans = []
+prev_s = 0
+for i in range(N):
+    ans.append(str(S[i] - prev_s))
+    prev_s = S[i]
 
-# map
-n, m = map(int, input().split())
+print(" ".join(ans))
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1

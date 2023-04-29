@@ -9,3 +9,4 @@ def gcd(a, b):
 def lcm(a, b):
     g = gcd(a, b)
     return a // g * b  # a * b // g と書くよりもオーバーフローになりにくい
+    

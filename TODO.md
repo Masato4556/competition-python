@@ -14,3 +14,9 @@
     - https://qiita.com/toast-uz/items/bf6f142bace86c525532
     - https://qiita.com/toast-uz/items/a63f2d57ec7321186f12
     - https://qiita.com/toast-uz/items/0d48813591193f331258
+
+
+
+ゴールデンウィーク中は、DP強化週間として、下記の問題を解く
+- https://atcoder.jp/contests/dp
+- https://atcoder.jp/contests/tdpc

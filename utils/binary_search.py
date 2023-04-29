@@ -1,7 +1,7 @@
 # 対象要素のインデックスを返す
 def binary_find(arr, target):
     """
-    arr: 昇順または降順にソートされた数値の列（リストや配列など）
+    arr: 昇順にソートされた数値の列（リストや配列など）
     target: 探索する数値
     """
     left, right = 0, len(arr) - 1  # 探索範囲の左端と右端
@@ -18,7 +18,7 @@ def binary_find(arr, target):
 # 最も近しい値のindexを返す
 def binary_search(arr, target):
     """
-    arr: 昇順または降順にソートされた数値の列（リストや配列など）
+    arr: 昇順にソートされた数値の列（リストや配列など）
     target: 探索する数値
     """
     left, right = 0, len(arr) - 1  # 探索範囲の左端と右端
