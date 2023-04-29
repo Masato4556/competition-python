@@ -1,3 +1,14 @@
+'''
+挿入、削除、最小値取得がならし計算量O(logN)で行えるデータ構造
+
+heapify: O(N)
+挿入(push): O(logN) ならし計算量
+削除(erase): O(logN) ならし計算量
+最小値取得(pop): O(logN) ならし計算量
+
+参考: https://socha77.hatenablog.com/entry/2020/06/17/012842
+'''
+
 import heapq
 
 class LazyDeletionHeapq:
@@ -8,7 +19,7 @@ class LazyDeletionHeapq:
         heapq.heapify(self.que)
 
     def push(self, x):
-        heapq.heappush(self.que, x)
+        heapq.heappush(self.que, x) 
 
     def erase(self, x):
         heapq.heappush(self.deleted, x)
