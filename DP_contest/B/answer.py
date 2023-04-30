@@ -1,20 +1,14 @@
+INF = 10 ** 12
 
-# string
-s = input()
+n, k = map(int, input().split())
+h = list(map(int, input().split()))
 
-# int
-n = int(input())
+dp = [INF] * n
+dp[0] = 0
 
-# list
-a = list(map(int, input().split()))
+for i in range(1, n):
+    for j in range(1, k+1):
+        if i-j < 0: continue
+        dp[i] = min(dp[i], dp[i-j] + abs(h[i] - h[i-j]))
 
-# map
-n, m = map(int, input().split())
-
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print(dp[-1])

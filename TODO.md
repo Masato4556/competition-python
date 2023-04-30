@@ -15,6 +15,7 @@
     - https://qiita.com/toast-uz/items/a63f2d57ec7321186f12
     - https://qiita.com/toast-uz/items/0d48813591193f331258
 
+- 同じ要素が存在する時の順列の個数を求める関数を作る (p+q)!/p!q!
 
 
 ゴールデンウィーク中は、DP強化週間として、下記の問題を解く
