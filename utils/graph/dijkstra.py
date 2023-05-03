@@ -21,3 +21,5 @@ def dijkstra(adj_list, start):
                 heapq.heappush(heap, (dist[v], v))
 
     return dist
+
+# costの値を-1倍してこの関数を実行し、結果も-1倍することで、最長路を求めることができる

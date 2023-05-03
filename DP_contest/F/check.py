@@ -1,6 +1,7 @@
 import subprocess
 import os
 import time
+import gc
 
 
 def generate_testfile_list():
@@ -58,6 +59,7 @@ if __name__ == '__main__':
 
         print_result(testfile, output, expected, error, run_time)
         total_result &= output == expected
+        gc.collect()
 
     print("~~~~~~~~~~~~")
     print("Total Result")

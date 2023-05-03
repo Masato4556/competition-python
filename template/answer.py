@@ -1,3 +1,8 @@
+from collections import deque, defaultdict
+import heapq
+from functools import lru_cache
+import sys
+sys.setrecursionlimit(10 ** 9)
 
 # string
 s = input()

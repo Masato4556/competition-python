@@ -1,20 +1,20 @@
 
-# string
-s = input()
+MOD = 10**9+7
 
-# int
-n = int(input())
+H, W = map(int, input().split())
+A = [input() for _ in range(H)]
 
-# list
-a = list(map(int, input().split()))
+dp = [[0 for _ in range(W)] for _ in range(H)]
+dp[0][0] = 1
 
-# map
-n, m = map(int, input().split())
+for h in range(H):
+    for w in range(W):
+        if A[h][w] == "#":
+            continue
+        if h > 0:
+            dp[h][w] += dp[h-1][w]
+        if w > 0:
+            dp[h][w] += dp[h][w-1]
+        dp[h][w] %= MOD
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print(dp[-1][-1])
