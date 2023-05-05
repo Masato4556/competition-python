@@ -1,20 +1,19 @@
+from collections import defaultdict
 
-# string
-s = input()
+N = int(input())
+P = list(map(float, input().split()))
 
-# int
-n = int(input())
+dp = [defaultdict(float) for _ in range(N+1)]
+dp[0][0] = 1
 
-# list
-a = list(map(int, input().split()))
+for i in range(1, N+1):
+    for k, v in dp[i-1].items():
+        dp[i][k+1] += v * P[i-1]
+        dp[i][k-1] += v * (1 - P[i-1])
 
-# map
-n, m = map(int, input().split())
-
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+ans = 0
+for k, v in dp[-1].items():
+    if k <= 0:
+        continue
+    ans += v
+print(ans)
