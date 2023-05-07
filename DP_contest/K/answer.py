@@ -1,20 +1,16 @@
 
-# string
-s = input()
+N, K = map(int, input().split())
+A = list(map(int, input().split()))
 
-# int
-n = int(input())
+dp = [False] * (K+1)
 
-# list
-a = list(map(int, input().split()))
 
-# map
-n, m = map(int, input().split())
+for i in range(1, K+1):
+    for a in A:
+        if i-a < 0:
+            break
+        if not dp[i-a]:
+            dp[i] = True
+            break
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print("First" if dp[K] else "Second")
