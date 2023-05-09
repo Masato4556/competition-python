@@ -5,10 +5,20 @@
 
 そのため、なるべく型変換の頻度を少なくする。
 
+# 配列のサイズをなるべく小さくする
+- 動的計画法などで結果を格納するdp配列のサイズを最低限のサイズにすることで解けた問題があった。
+  - https://atcoder.jp/contests/dp/submissions/41248818
 
 # listよりsetを用いる
 setの方がメモリ使用量が少ない
 
+# 再起処理を用いない
+再起処理を用いないように書き換えることで、TLEを回避できる問題があった。
+
+AC
+https://atcoder.jp/contests/dp/submissions/41259995
+TLE
+https://atcoder.jp/contests/dp/submissions/41259803
 
 # 意外と計算量が大きい処理に注意
 
