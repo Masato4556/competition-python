@@ -1,20 +1,25 @@
+MOD = 10**9 + 7 
 
-# string
-s = input()
+def cumulative_sum(array):
+    n = len(array)
+    cumsum = [0] * (n+1)
+    for i in range(n):
+        cumsum[i+1] = cumsum[i] + array[i]
+    return cumsum
 
-# int
-n = int(input())
+N, K = map(int, input().split())
+A = list(map(int, input().split()))
 
-# list
-a = list(map(int, input().split()))
+if K == 0:
+    print(1)
+    exit()
 
-# map
-n, m = map(int, input().split())
+dp = [[0] * (K+1) for _ in range(N+1)]
+dp[0][0] = 1
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+for i in range(1, N+1):
+    s = cumulative_sum(dp[i-1])
+    for j in range(K+1):
+        dp[i][j] = (s[j+1] - s[max(0, j-A[i-1])]) % MOD
+
+print(dp[N][K])
