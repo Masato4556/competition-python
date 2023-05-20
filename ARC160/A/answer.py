@@ -34,8 +34,6 @@ for i in range(N):
 sum_l = sum(l)
 sum_m = sum(m)
 
-# print(time.perf_counter() - time_sta)
-
 if K <= sum_l:
     ans = []
     cnt = 0
@@ -67,8 +65,8 @@ else:
     for j in range(start + 1, N):
         if A[start] > A[j]:
             continue
+        ans.append(f(start, j))
         heapq.heappush(AA, (A[j], j))
     for _ in range(K-cnt+1):
         v, end = AA.pop()
-
     print(*f(start, end))

@@ -1,25 +1,20 @@
-from collections import deque, defaultdict
-import heapq
-from functools import lru_cache
-import sys
-sys.setrecursionlimit(10 ** 9)
+from math import floor
 
-# string
-s = input()
+MOD = 998244353
 
-# int
-n = int(input())
+T = int(input())
 
-# list
-a = list(map(int, input().split()))
+for _ in range(T):
+    N = int(input())
+    ans = 0
 
-# map
-n, m = map(int, input().split())
+    m = floor(N**(1/2))
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+    for y in range(1, m+1):
+        ans += 6 * (y - 1) * (N//y - y)
+        ans += 3 * (N//y - y)
+        ans += 3 * (y - 1)
+        ans += 1
+        ans %= MOD
+
+    print(ans)

@@ -1,20 +1,16 @@
 
-# string
+n = int(input())
 s = input()
 
-# int
-n = int(input())
+cnt = 0
+ans = []
+for c in s:
+    if c == "\"":
+        cnt += 1
+    elif c == ",":
+        if cnt % 2 == 0:
+            ans.append(".")
+            continue
+    ans.append(c)
 
-# list
-a = list(map(int, input().split()))
-
-# map
-n, m = map(int, input().split())
-
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print("".join(ans))

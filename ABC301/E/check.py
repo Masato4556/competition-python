@@ -26,6 +26,7 @@ def print_result(testfile, result, expected, error, run_time):
         print()
     else:
         print("Failure!")
+        print("実行時間: {}秒".format(run_time))
         print("<result>")
         print(result)
         print("<expected>")
