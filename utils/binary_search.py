@@ -16,6 +16,8 @@ def binary_find(arr, target):
     return -1  # 探索対象が見つからなかった場合、-1を返す
 
 # 最も近しい値のindexを返す
+
+
 def binary_search(arr, target):
     """
     arr: 昇順にソートされた数値の列（リストや配列など）
@@ -42,6 +44,23 @@ def binary_search(arr, target):
             return right
         else:
             return left
+
+
+# 正しく動くか確認していない
+# 一致する場合はそのインデックスを、左側のインデックスを返す
+def binary_search_left(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return left
+
 
 print(binary_find([1, 10, 100], 100))
 print(binary_search([1, 10, 100], 5))

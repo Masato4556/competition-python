@@ -1,22 +1,15 @@
-from collections import deque, defaultdict
-import heapq
-from functools import lru_cache
-import sys
-sys.setrecursionlimit(10 ** 9)
-
-
 X, Y, Z = map(int, input().split())
 S = input()
 N = len(S)
-A = []
 
-ans = 0
-A_start = 0
+dp = [[0] * 2 for _ in range(N+1)]
+dp[0][1] = Z
 for i in range(N):
-    if S[i] == "A":
-        A_start = i
-        break
-    ans += X
+    if S[i] == "a":
+        dp[i+1][0] = min(dp[i][0] + X, dp[i][1] + X + Z)
+        dp[i+1][1] = min(dp[i][1] + Y, dp[i][0] + Y + Z)
+    else:
+        dp[i+1][0] = min(dp[i][0] + Y, dp[i][1] + Y + Z)
+        dp[i+1][1] = min(dp[i][1] + X, dp[i][0] + X + Z)
 
-dp
-for i in range(A_start, N):
+print(min(dp[-1]))

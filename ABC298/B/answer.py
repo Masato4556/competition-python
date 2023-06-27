@@ -1,25 +1,18 @@
-from collections import deque, defaultdict
-import heapq
-from functools import lru_cache
-import sys
-sys.setrecursionlimit(10 ** 9)
+# Python3
+import numpy as np
 
-# string
-s = input()
+N = int(input())
+A = [list(map(int, input().split())) for _ in range(N)]
+B = [list(map(int, input().split())) for _ in range(N)]
 
-# int
-n = int(input())
+a = np.array(A)
+b = np.array(B)
 
-# list
-a = list(map(int, input().split()))
+for i in range(4):
+    if np.min(b - a) >= 0:
+        print("Yes")
+        exit(0)
 
-# map
-n, m = map(int, input().split())
+    a = np.rot90(a)
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+print("No")
