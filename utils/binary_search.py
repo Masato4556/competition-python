@@ -63,4 +63,6 @@ def binary_search_left(arr, target):
 
 
 print(binary_find([1, 10, 100], 100))
+print(binary_find([1, 10, 100], 5))
 print(binary_search([1, 10, 100], 5))
+print(binary_search_left([1, 10, 100], 5))

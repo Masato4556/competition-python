@@ -1,6 +1,6 @@
 {
     "二分探索で探索対象のインデックスを返す": {
-        "prefix": "bin_find",
+        "prefix": "binary_find",
         "body": [
             "def binary_find(arr, target):",
             "    \"\"\"",
@@ -21,7 +21,7 @@
         "description": "二分探索で探索対象のインデックスを返す"
     },
     "二分探索で探索対象のインデックスを返す(探索対象が存在しない場合、最も近しい値のインデックスを返す)": {
-        "prefix": "bin_search",
+        "prefix": "binary_search",
         "body": [
             "def binary_search(arr, target):",
             "    \"\"\"",
