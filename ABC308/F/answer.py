@@ -1,19 +1,24 @@
-# string
-s = input()
+import heapq
+N, M = map(int, input().split())
+P = list(map(int, input().split()))
+P.sort()
 
-# int
-n = int(input())
+L = list(map(int, input().split()))
+D = list(map(int, input().split()))
+V = [(l, -1 * d) for l, d in zip(L, D)]
+heapq.heapify(V)
 
-# list
-a = list(map(int, input().split()))
+availables = []
 
-# map
-n, m = map(int, input().split())
+ans = 0
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+for i in range(N):
+    while len(V) > 0 and P[i] >= V[0][0]:
+        _, d = heapq.heappop(V)
+        heapq.heappush(availables, d)
+    
+    ans += P[i]
+    if len(availables) > 0:
+        ans += heapq.heappop(availables)
+    
+print(ans)
