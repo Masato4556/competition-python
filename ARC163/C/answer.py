@@ -1,19 +1,28 @@
-# string
-s = input()
+t = int(input())
 
-# int
-n = int(input())
+for _ in range(t):
+    n = int(input())
 
-# list
-a = list(map(int, input().split()))
+    if n == 1:
+        print("Yes")
+        print(1)
+        continue
+    elif n == 2:
+        print("No")
+        continue
 
-# map
-n, m = map(int, input().split())
+    A = set()
+    for i in range(1, n):
+        A.add(i * (i+1))
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+    cnt = 0
+    while True:
+        i = n - cnt
+        if 2**cnt*(n-cnt) not in A:
+            A.add(2**cnt*(n-cnt))
+            print("Yes")
+            print(*A)
+            break
+        A = {2 * a for a in A if a != 2**cnt * (i-1) * i}
+        A.add(2)
+        cnt += 1
