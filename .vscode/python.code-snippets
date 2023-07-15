@@ -1,55 +1,128 @@
 {
-    "二分探索で探索対象のインデックスを返す": {
-        "prefix": "binary_find",
+    "print": {
+        "prefix": "_print",
         "body": [
-            "def binary_find(arr, target):",
-            "    \"\"\"",
-            "    arr: 昇順にソートされた数値の列（リストや配列など）",
-            "    target: 探索する数値",
-            "    \"\"\"",
-            "    left, right = 0, len(arr) - 1  # 探索範囲の左端と右端",
-            "    while left <= right:",
-            "        mid = (left + right) // 2  # 探索範囲の中央のインデックス",
-            "        if arr[mid] == target:",
-            "            return mid  # 探索対象が見つかった場合、そのインデックスを返す",
-            "        elif arr[mid] < target:",
-            "            left = mid + 1  # 中央より大きい場合、探索範囲を中央より右側にする",
-            "        else:",
-            "            right = mid - 1  # 中央より小さい場合、探索範囲を中央より左側にする",
-            "    return -1  # 探索対象が見つからなかった場合、-1を返す"
+            "print($1)",
         ],
-        "description": "二分探索で探索対象のインデックスを返す"
+        "description": "print alias"
     },
-    "二分探索で探索対象のインデックスを返す(探索対象が存在しない場合、最も近しい値のインデックスを返す)": {
-        "prefix": "binary_search",
+
+
+    "標準入力:string": {
+        "prefix": "_input_str",
         "body": [
-            "def binary_search(arr, target):",
-            "    \"\"\"",
-            "    arr: 昇順にソートされた数値の列（リストや配列など）",
-            "    target: 探索する数値",
-            "    \"\"\"",
-            "    left, right = 0, len(arr) - 1  # 探索範囲の左端と右端",
-            "    while left <= right:",
-            "        mid = (left + right) // 2  # 探索範囲の中央のインデックス",
-            "        if arr[mid] == target:",
-            "            return mid  # 探索対象が見つかった場合、そのインデックスを返す",
-            "        elif arr[mid] < target:",
-            "            left = mid + 1  # 中央より大きい場合、探索範囲を中央より右側にする",
-            "        else:",
-            "            right = mid - 1  # 中央より小さい場合、探索範囲を中央より左側にする",
-            "",
-            "    # arr中にxが含まれない場合",
-            "    # 探索した値と最も近い要素のインデックスを返す",
-            "    if left > len(arr) - 1:",
-            "        return len(arr) - 1",
-            "    elif right < 0:",
-            "        return 0",
-            "    else:",
-            "        if target - arr[right] < arr[left] - target:",
-            "            return right",
-            "        else:",
-            "            return left"
+            "${1:S} = input()",
         ],
-        "description": "二分探索で探索対象のインデックスを返す(探索対象が存在しない場合、最も近しい値のインデックスを返す)"
-    }
+        "description": ""
+    },
+    "標準入力:横並びstring": {
+        "prefix": "_input_str_str",
+        "body": [
+            "${1:S}, ${2:T} = input().split()",
+        ],
+        "description": ""
+    },
+    "標準入力:横並びstring->list": {
+        "prefix": "_input_str_list",
+        "body": [
+            "${1:S} = list(map(int, input().split()))",
+        ],
+        "description": ""
+    },
+    "標準入力:int": {
+        "prefix": "_input_int",
+        "body": [
+            "${1:N} = int(input())",
+        ],
+        "description": ""
+    },
+    "標準入力:横並びint": {
+        "prefix": "_input_int_int",
+        "body": [
+            "${1:N}, ${2:M} = map(int, input().split())",
+        ],
+        "description": ""
+    },
+    "標準入力:横並びint->list": {
+        "prefix": "_input_int_list",
+        "body": [
+            "${1:A} = list(map(int, input().split()))",
+        ],
+        "description": ""
+    },
+
+
+    "標準入力:縦並びstring->list": {
+        "prefix": "_input_multiline_str_list",
+        "body": [
+            "${1:S} = [input() for _ in range(${2:N})]",
+        ],
+        "description": ""
+    },
+    "標準入力:縦並びint->list": {
+        "prefix": "_input_multiline_int_list",
+        "body": [
+            "${1:A} = [int(input()) for _ in range(${2:N})]",
+        ],
+        "description": ""
+    },
+    "標準入力:グリッドHW_string": {
+        "prefix": "_input_multiline_grid_str",
+        "body": [
+            "H, W = map(int, input().split())",
+            "S = [input().split() for _ in range(H)]"
+        ],
+        "description": ""
+    },
+    "標準入力:グリッドHW_int": {
+        "prefix": "_input_multiline_grid_int",
+        "body": [
+            "H, W = map(int, input().split())",
+            "S = [list(map(int, input().split())) for _ in range(H)]"
+        ],
+        "description": ""
+    },
+
+    "ループ": {
+        "prefix": "_for_i",
+        "body": [
+            "for i in range(${1:N}):",
+        ],
+        "description": ""
+    },
+    "二重ループ": {
+        "prefix": "_for_ij",
+        "body": [
+            "for i in range(${1:N}):",
+            "   \tfor j in range(${2:i+1, N}):",
+        ],
+        "description": ""
+    },
+    "三重ループ": {
+        "prefix": "_for_ijk",
+        "body": [
+            "for i in range(${1:N}):",
+            "   \tfor j in range(${2:i+1, N}):",
+            "       \tfor k in range(${3:j+1, N}):",
+        ],
+        "description": ""
+    },
+
+    "カウンター{要素: 出現回数}": {
+        "prefix": "_counter",
+        "body": [
+            "from collections import Counter",
+            "${1:A}_count = Counter(${1:A})"
+        ],
+        "description": ""
+    },
+    "ランレングス[(連続する要素: 連続回数)]": {
+        "prefix": "_runlength",
+        "body": [
+            "from itertools import groupby",
+            "${1:A}_rl = [(k, len(list(g))) for k, g in groupby(${1:A})]"
+        ],
+        "description": ""
+    },
+
 }
