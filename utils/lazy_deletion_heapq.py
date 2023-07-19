@@ -58,7 +58,7 @@ class LazyDeletionHeapq:
         return len(self.que) - len(self.deleted)
 
     def __str__(self):
-        return f"{str(self.que)} DELETED:{str(self.deleted)} LENGTH: {len(self)}, LENGTH: {self.counter.total()}"
+        return f"{str(self.que)} DELETED:{str(self.deleted)} LENGTH: {len(self)}, LENGTH: {sum(self.counter.values())}"
 
 
 ldh = LazyDeletionHeapq([1, 6, 3, 5, 9, 12, 17, 12])

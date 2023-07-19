@@ -1,19 +1,19 @@
-# string
-s = input()
 
-# int
-n = int(input())
 
-# list
-a = list(map(int, input().split()))
+N = int(input())
+cards = []
 
-# map
-n, m = map(int, input().split())
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+cnt = 0
+
+ans = 0
+min_diff = float('inf')
+for i in range(N):
+    a, b = map(int, input().split())
+    cards.append((a, b))
+    ans += max(a, b)
+    if a - b > 0:
+        cnt += 1
+    min_diff = min(min_diff, abs(a-b))
+
+print(ans if cnt % 2 == 0 else ans - min_diff)

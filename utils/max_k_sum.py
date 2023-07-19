@@ -48,7 +48,7 @@ class LazyDeletionHeapq:
         return len(self.que) - len(self.deleted)
 
     def __str__(self):
-        return f"{str(self.que)} DELETED:{str(self.deleted)} LENGTH: {len(self)}, LENGTH: {self.counter.total()}"
+        return f"{str(self.que)} DELETED:{str(self.deleted)} LENGTH: {len(self)}, LENGTH: {sum(self.counter.values())}"
 
 
 # ある数列の大きい順にK個の要素の合計を求めることもできるデータ構造
