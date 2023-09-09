@@ -6,7 +6,8 @@ def gcd(a, b):
         return gcd(b, a % b)
 
 # 最小公倍数
+
+
 def lcm(a, b):
     g = gcd(a, b)
     return a // g * b  # a * b // g と書くよりもオーバーフローになりにくい
-    

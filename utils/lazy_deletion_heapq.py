@@ -13,7 +13,7 @@ import heapq
 from collections import Counter
 
 
-class LazyDeletionHeapq:
+class LazyHeap:
     def __init__(self, arr=[]):
         self.que = arr
         self.deleted = []
@@ -61,7 +61,7 @@ class LazyDeletionHeapq:
         return f"{str(self.que)} DELETED:{str(self.deleted)} LENGTH: {len(self)}, LENGTH: {sum(self.counter.values())}"
 
 
-ldh = LazyDeletionHeapq([1, 6, 3, 5, 9, 12, 17, 12])
+ldh = LazyHeap([1, 6, 3, 5, 9, 12, 17, 12])
 
 print(ldh)
 print(ldh.pop())  # 最小の要素が取り出せる
