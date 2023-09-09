@@ -117,7 +117,7 @@
         "description": ""
     },
     "ランレングス[(連続する要素: 連続回数)]": {
-        "prefix": "_runlength",
+        "prefix": "_run_length_encoding",
         "body": [
             "from itertools import groupby",
             "${1:A}_rl = [(k, len(list(g))) for k, g in groupby(${1:A})]"
