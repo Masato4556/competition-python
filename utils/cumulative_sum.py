@@ -12,4 +12,5 @@ def cumulative_sum(array):
         cumsum[i+1] = cumsum[i] + array[i]
     return cumsum
 
-print(cumulative_sum([0,1,2,3,4,5,6,7,8,9,10]))
+
+print(cumulative_sum([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
