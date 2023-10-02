@@ -1,51 +1,26 @@
-# 2分探索を利用した回答
-# TLEで突破ならず
-
-def binary_search_lower(f, lo, hi):
-    left = lo
-    right = hi
-    if f(lo):
-        return lo
-    if not f(hi):
-        return -1
-
-    while right - left > 1:
-        mid = (left + right)//2
-        if not f(mid):
-            left = mid
-        else:
-            right = mid
-    return right
+import heapq
 
 
 N, M = map(int, input().split())
 
-events = [list(map(int, input().split())) for _ in range(M)]
-events.sort()
+events = []
+for _ in range(M):
+    t, w, s = map(int, input().split())
+    heapq.heappush(events, (t, 2, w, s))
 
-events_done = [False for _ in range(M)]
+exists = list(range(N))
 ans = [0 for _ in range(N)]
 
-
-def gen_f(next_time):
-    return lambda i: next_time <= events[i][0]
-
-
-for i in range(N):
-    next_time = 0
-    next_event_i = binary_search_lower(gen_f(next_time), 0, M-1)
-    while next_event_i != -1:
-        while next_event_i < M and events_done[next_event_i]:
-            next_event_i += 1
-
-        if next_event_i >= M:
-            break
-
-        t, w, s = events[next_event_i]
-        ans[i] += w
-        next_time = t+s
-        events_done[next_event_i] = True
-        next_event_i = binary_search_lower(gen_f(next_time), 0, M-1)
+while len(events):
+    t, k, a, b = heapq.heappop(events)
+    if k == 2:
+        if not len(exists):
+            continue
+        i = heapq.heappop(exists)
+        ans[i] += a
+        heapq.heappush(events, (t+b, 1, i, -1))
+    else:
+        heapq.heappush(exists, a)
 
 for a in ans:
     print(a)
