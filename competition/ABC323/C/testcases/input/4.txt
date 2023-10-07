@@ -1,0 +1,7 @@
+5 5
+500 500 500 500 1000
+xxxxo
+oxxxx
+xoxxx
+xxoxx
+xxxox
