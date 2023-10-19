@@ -41,7 +41,7 @@ class UnionFind():
     def group_count(self):
         return len(self.roots())
 
-    def all_group_members(self):
+    def all_group_members(self): # Debug用メソッド　計算量多いので使わないように
         group_members = defaultdict(list)
         for member in range(self.n):
             group_members[self.root(member)].append(member)
@@ -49,4 +49,3 @@ class UnionFind():
 
     def __str__(self):
         return '\n'.join(f'{r}: {m}' for r, m in self.all_group_members().items())
-sd
