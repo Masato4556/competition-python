@@ -34,4 +34,6 @@ for S in range(2**N):
 
 for A in dp:
     print(max(A))
+
+path = []
     # for a in A:

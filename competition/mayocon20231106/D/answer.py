@@ -1,10 +1,17 @@
-# 参考ページ: https://qiita.com/ether2420/items/7b67b2b35ad5f441d686
+def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
 
-# 右のページを読んで理解する https://qiita.com/AkariLuminous/items/32cbf5bc3ffb2f84a898
-# initまでは理解した、次はadd
+
+def lcm(a, b):
+    g = gcd(a, b)
+    return a // g * b
+
 
 def segfunc(x, y):
-    return x+y
+    return gcd(x, y)
 
 
 class SegTree:
@@ -56,8 +63,12 @@ class SegTree:
         return res
 
 
-N = 8
-A = [1, 2, 3, 4, 5, 6, 7, 8]
-a = SegTree([1, 2, 3, 4, 5, 6, 7, 8], segfunc, 0)
-print(a.tree)  # インデックス0は使われていない
-print(a.query(3, 7))
+N = int(input())
+A = list(map(int, input().split()))
+
+ide_ele = 1
+for a in A:
+    ide_ele = lcm(ide_ele, a)
+
+segtree = SegTree(A, segfunc, ide_ele)
+print(max([gcd(segtree.query(0, i), segtree.query(i+1, N)) for i in range(N)]))
