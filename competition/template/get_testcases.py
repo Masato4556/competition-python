@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from urllib import request
 import argparse
-
+import os
 
 def get_testcases(url):
     response = request.urlopen(url)
@@ -21,13 +21,19 @@ def get_testcases(url):
     return (input_cases, output_cases)
 
 
-parser = argparse.ArgumentParser(description='get testcases')
-parser.add_argument("url", help="atcoder task url")
+parser = argparse.ArgumentParser(description='テストケースの取得')
+parser.add_argument('url')
 args = parser.parse_args()
 
 
-# テストケースのテキストファイルを作成
 input_cases, output_cases = get_testcases(args.url)
+print(input_cases, output_cases)
+
+
+os.makedirs("testcases/input")
+os.makedirs("testcases/output")
+
+# テストケースのテキストファイルを作成
 testcase_num = len(input_cases)
 for i in range(testcase_num):
     with open("./testcases/input/{}.txt".format(i+1), mode='w') as f:
