@@ -18,10 +18,10 @@ class SuffixArray:
 
         for i in range(n+1):
             sa[i] = i
-            rank[i] = ord(s[i]) if i<n else -1
+            rank[i] = ord(s[i]) if i < n else -1
 
         k = 1
-        cmp_key = lambda e: (rank[e], rank[e+k] if e+k<=n else -1)
+        def cmp_key(e): return (rank[e], rank[e+k] if e+k <= n else -1)
         while k <= n:
             sa.sort(key=cmp_key)
             tmp[sa[0]] = 0
@@ -50,12 +50,14 @@ class SuffixArray:
         lcp[0] = 0
         for i in range(n):
             j = sa[rank[i] - 1]
-            if h > 0: h -= 1
-            while j+h < n and i+h < n and s[j+h]==s[i+h]:
+            if h > 0:
+                h -= 1
+            while j+h < n and i+h < n and s[j+h] == s[i+h]:
                 h += 1
             lcp[rank[i] - 1] = h
         self.lcp = lcp
         return lcp
+
 
 # query(a, b): S[a:] と S[b:] の最長共通接頭語(LCP)の長さを求める
 # S = (文字列)
@@ -75,8 +77,11 @@ for i in range(N0-2, -1, -1):
 D = [0]*(N+1)
 for i, s in enumerate(sa):
     D[s] = i
+
+
 def query(a, b):
-    L = D[a] + N0; R = D[b] + N0
+    L = D[a] + N0
+    R = D[b] + N0
     if L > R:
         L, R = R, L
     s = N+1
@@ -84,9 +89,10 @@ def query(a, b):
         if R & 1:
             R -= 1
             s = min(s, data[R-1])
- 
+
         if L & 1:
             s = min(s, data[L-1])
             L += 1
-        L >>= 1; R >>= 1
+        L >>= 1
+        R >>= 1
     return s

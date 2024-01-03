@@ -4,6 +4,7 @@ def build_suffix_array(s):
     suffixes.sort()
     return [suffix[1] for suffix in suffixes]
 
+
 def search_pattern(suffix_array, T, P):
     low, high = 0, len(suffix_array) - 1
 
@@ -39,10 +40,12 @@ def search_pattern(suffix_array, T, P):
 
     return []
 
+
 def find_pattern_positions(T, P):
     suffix_array = build_suffix_array(T)
     positions = search_pattern(suffix_array, T, P)
     return positions
+
 
 # Example usage:
 T = "banana"
