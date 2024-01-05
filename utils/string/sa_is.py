@@ -25,32 +25,71 @@ def classify_chartype(T):
     return types, lms_ids
 
 
-def sais(input_str):
-    # int型に変換する
-    s = [ord(c) for c in input_str]
-    s.append(ord("$"))
+def induced_sort(string, buckets, types):
+    # 具体的にどのような操作を行なっているかを理解する
+    begin_of_bucket = dict([(k, 0) for k in set(string)])
+    for _, v in sorted(buckets.items(), key=lambda x: x[0]):
+        for elem in v:  # from left to right
+            if elem == -1:
+                continue  # ignore initialize value
+            if types[elem - 1] == 0:  # if the left character is L-type
+                buckets[string[elem - 1]
+                        ][begin_of_bucket[string[elem - 1]]] = elem - 1
+                begin_of_bucket[string[elem - 1]] += 1  # forward current end
 
+    end_of_bucket = dict([(k, len(buckets[k]) - 1) for k in set(string)])
+    for k, v in sorted(buckets.items(), key=lambda x: x[0], reverse=True):
+        for elem in reversed(v):  # from right to left
+            if elem == -1:
+                continue
+            if types[elem - 1] == 1 and string[elem - 1] != '$':  # if the left character is S-type
+                buckets[string[elem - 1]
+                        ][end_of_bucket[string[elem - 1]]] = elem - 1
+                end_of_bucket[string[elem - 1]] -= 1  # backward current end
+    return buckets
+
+
+def initialize_buckets(s):
     counts = {}
     for c in s:
-        print(c)
         if c not in counts:
             counts[c] = 0
         counts[c] += 1
     print(counts)
 
-    # initialize buckets
     buckets = {}
     for c, count in sorted(counts.items()):
-        print(c, count)
         buckets[c] = [-1] * count
 
-    print(buckets)
+    return buckets
+
+
+def sais(input_str):
+    # # int型に変換する
+    # s = [ord(c) for c in input_str]
+    # s.append(ord("$"))
+
+    s = input_str + "$"
 
     # Classify charactor to L/S type: S = 1, L = 0 and find LMS
     types, lms_ids = classify_chartype(s)
     print(types, lms_ids)
 
+    # initialize buckets
+    buckets = initialize_buckets(s)
+    print("init buckets", buckets)
+
+    # LMSを辞書の降順に各バケットの一番下から上へ順に挿入
+    end_of_bucket = dict([(s, -1) for s in buckets.keys()])
+    print("end_of_bucket", end_of_bucket)
+    for lms_id in lms_ids:  # 1)
+        pre = s[lms_id]  # prefix of S[lms_ids:]
+        print(lms_id, pre)
+        buckets[pre][end_of_bucket[pre]] = lms_id
+        end_of_bucket[pre] -= 1  # forward current end
+
     # induced sortを実行する
+    print(induced_sort(s, buckets, types))
 
 
-sais("banana")
+sais("abracadabra")
