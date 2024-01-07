@@ -3,7 +3,6 @@ from urllib import request
 import argparse
 import os
 
-
 def get_testcases(url):
     response = request.urlopen(url)
     soup = BeautifulSoup(response, 'html.parser')
@@ -31,8 +30,8 @@ input_cases, output_cases = get_testcases(args.url)
 print(input_cases, output_cases)
 
 
-os.makedirs("testcases/input", exist_ok=True)
-os.makedirs("testcases/output", exist_ok=True)
+os.makedirs("testcases/input")
+os.makedirs("testcases/output")
 
 # テストケースのテキストファイルを作成
 testcase_num = len(input_cases)
