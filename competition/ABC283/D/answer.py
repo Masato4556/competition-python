@@ -1,31 +1,26 @@
-def f(s, i):
-    v = 0
-    for j in range(i, -1, -1):
-        s_j = s[j]
-        if s_j == "(": v += 1
-        if s_j == ")": v -= 1
+from collections import deque
 
-        if v > 0: 
-            return j+1
-    return 0
 
-s = input()
-len_s = len(s)
-box = [""] * len_s
+que = deque()
+included = set()
 
-result = "Yes"
-for i in range(len_s):
-    s_i = s[i]
-    if s_i == "(": continue
-    if s_i == ")": 
-        j = f(s, i)
-        for k in range(j, i):
-            box[k] = ""
-        continue
-    if s_i in box:
-        result = "No"
-        break
-    box[i] = s_i
+S = input()
 
-print(result)
-print(box)
+for c in S:
+    if c == "(":
+        que.append(c)
+        included.add(c)
+    elif c == ")":
+        while len(que):
+            v = que.pop()
+            if v == "(":
+                break
+            included.remove(v)
+    else:
+        if c in included:
+            print("No")
+            exit()
+        que.append(c)
+        included.add(c)
+
+print("Yes")

@@ -1,20 +1,14 @@
+N, Q = map(int, input().split())
+G = set()
+for _ in range(Q):
+    t, a, b = map(int, input().split())
+    a -= 1
+    b -= 1
 
-# string
-s = input()
-
-# int
-n = int(input())
-
-# list
-a = list(map(int, input().split()))
-
-# map
-n, m = map(int, input().split())
-
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+    if t == 1:
+        G.add((a, b))
+    elif t == 2:
+        if (a, b) in G:
+            G.remove((a, b))
+    else:
+        print("Yes" if (a, b) in G and (b, a) in G else "No")
