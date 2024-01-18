@@ -1,20 +1,36 @@
+def transpose(A):
+    return ["".join(a) for a in zip(*A)]
 
-# string
-s = input()
 
-# int
-n = int(input())
+H, W = map(int, input().split())
 
-# list
-a = list(map(int, input().split()))
+S = []
+T = []
+for _ in range(H):
+    S.append(input())
 
-# map
-n, m = map(int, input().split())
+for _ in range(H):
+    T.append(input())
 
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+S_t = transpose(S)
+T_t = transpose(T)
+
+counter = dict()
+
+for col in S_t:
+    if col not in counter:
+        counter[col] = 0
+    counter[col] += 1
+
+for col in T_t:
+    if col not in counter:
+        print("No")
+        exit()
+    counter[col] -= 1
+
+for k, v in counter.items():
+    if v != 0:
+        print("No")
+        exit()
+
+print("Yes")
