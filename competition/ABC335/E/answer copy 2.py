@@ -1,5 +1,7 @@
 
 from collections import defaultdict, deque
+import heapq
+
 from functools import lru_cache
 
 
@@ -53,11 +55,26 @@ class UnionFind():
         return '\n'.join(f'{r}: {m}' for r, m in self.all_group_members().items())
 
 
+def bfs_dist(graph, n, start):
+    dist = [0] * n
+    queue = deque([start])
+    dist[start] = 1
+
+    while queue:
+        v = queue.popleft()
+        for next_v in graph[v]:
+            if dist[next_v] >= dist[v] + 1:
+                continue
+            dist[next_v] = dist[v] + 1
+            queue.append(next_v)
+
+    return dist
+
+
 N, M = map(int, input().strip().split())
 A = list(map(int, input().strip().split()))
 
-G = [set() for _ in range(N)]
-indeg = [0] * N
+G = defaultdict(set)
 uf = UnionFind(N)
 
 edges = [list(map(lambda x: int(x)-1, input().split())) for _ in range(M)]
@@ -78,40 +95,12 @@ for u, v in edges:
     if u == v:
         continue
 
-    if A[u] < A[root(0)] or A[v] < A[root(0)]:
-        continue
-
-    if A[u] > A[root(N-1)] or A[v] > A[root(N-1)]:
-        continue
-
     if A[u] < A[v]:
-        if v not in G[u]:
-            G[u].add(v)
-            indeg[v] += 1
+        G[u].add(v)
     elif A[u] > A[v]:
-        if u not in G[v]:
-            G[v].add(u)
-            indeg[u] += 1
+        G[v].add(u)
 
-# トポロジーソートして距離を順次計算
-que = deque()
-dist = [0] * N
-dist[uf.root(0)] = 1
-for i in range(N):
-    if indeg[i] == 0:
-        que.append(i)
 
-count = list()
-while que:
-    v = que.popleft()
-    count.append(v)
-    for next_v in G[v]:
-        indeg[next_v] -= 1
-        if indeg[next_v] == 0:
-            que.append(next_v)
-        if dist[v] == 0:
-            continue
-        if dist[next_v] < dist[v] + 1:
-            dist[next_v] = dist[v] + 1
-
+# print(20945)
+dist = bfs_dist(G, N, uf.root(0))
 print(dist[uf.root(N-1)])
