@@ -26,7 +26,7 @@ def dijkstra(adj_list, start):
 # costの値を-1倍してこの関数を実行し、結果も-1倍することで、最長路を求めることができる
 
 
-def dijkstra_path(adj_list, start): # 動作確認できてない
+def dijkstra_path(adj_list, start):  # 動作確認できてない
     """
     adj_list: 隣接リストを表す辞書型データ構造 {u: [(v, cost), ... ], ... }
     start: 始点の頂点番号

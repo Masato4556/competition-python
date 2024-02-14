@@ -70,7 +70,7 @@ if __name__ == '__main__':
             start = time.perf_counter()
             result = subprocess.run(
                 [
-                    "python3", 
+                    "python3",
                     f"{generate_question_path(main_dir, sub_dir)}/answer.py"
                 ],
                 stdin=f,
