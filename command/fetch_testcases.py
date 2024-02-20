@@ -46,11 +46,16 @@ def get_testcases(url) -> tuple[list[str], list[str]]:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='テストケースの取得')
     parser.add_argument('main_dir')
-    parser.add_argument('sub_dir')
-    parser.add_argument('url')
+    parser.add_argument('sub_dir', type=str)
+    parser.add_argument('--url')
     args = parser.parse_args()
 
-    input_cases, output_cases = get_testcases(args.url)
+    lower_main_dir = args.main_dir.lower()
+    lower_sub_dir = args.sub_dir.lower()
+    url = f"https://atcoder.jp/contests/{lower_main_dir}/tasks/{lower_main_dir}_{lower_sub_dir}"
+    if args.url:
+        url = args.url
+    input_cases, output_cases = get_testcases(url)
     print(input_cases, output_cases)
 
     make_testcase_dir(args.main_dir, args.sub_dir)
