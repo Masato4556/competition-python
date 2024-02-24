@@ -1,25 +1,29 @@
-from collections import deque, defaultdict
 import heapq
-from functools import lru_cache
-import sys
-sys.setrecursionlimit(10 ** 9)
+from collections import defaultdict
 
-# string
-s = input()
+N = int(input())
+Q = int(input())
 
-# int
-n = int(input())
-
-# list
-a = list(map(int, input().split()))
-
-# map
-n, m = map(int, input().split())
-
-# 有向グラフ
-G = [set() for _ in range(n)]
-degs = [0 for _ in range(n)]
-for _ in range(m):
-    u, v = map(lambda x: int(x)-1, input().split())
-    G[u].add(v)
-    degs[u] += 1
+include = defaultdict(set)
+ans2 = [list() for _ in range(N+1)]
+ans3 = defaultdict(list)
+for _ in range(Q):
+    query = list(map(int, input().strip().split()))
+    if query[0] == 1:
+        i, j = query[1], query[2]
+        heapq.heappush(ans2[j], i)
+        if j not in include[i]:
+            include[i].add(j)
+            heapq.heappush(ans3[i], j)
+    elif query[0] == 2:
+        temp = []
+        for _ in range(len(ans2[query[1]])):
+            temp.append(heapq.heappop(ans2[query[1]]))
+        print(*temp)
+        ans2[query[1]] = temp
+    else:
+        temp = []
+        for _ in range(len(ans3[query[1]])):
+            temp.append(heapq.heappop(ans3[query[1]]))
+        print(*temp)
+        ans3[query[1]] = temp
