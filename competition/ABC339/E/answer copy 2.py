@@ -1,10 +1,27 @@
-# 参考ページ: https://qiita.com/ether2420/items/7b67b2b35ad5f441d686
+import sys
+from atcoder import lazysegtree
+from atcoder.string import suffix_array
+from bisect import bisect, bisect_left, insort, insort_left
+from collections import deque, defaultdict, Counter
+from copy import deepcopy
+from functools import lru_cache
+from heapq import heappush, heappop, heapify
+from itertools import accumulate, permutations, combinations, combinations_with_replacement, product, groupby
+from math import ceil, floor, sqrt, hypot, factorial, pi, sin, cos, tan, asin, acos, atan, atan2, radians, degrees, log2, gcd
+INF = float('inf')
+sys.setrecursionlimit(10**9)
+def f(x): return x
+def input(): return sys.stdin.readline().strip()
+def INT(): return int(input())
+def MAP(func): return map(func, input().split())
+def LIST(func=f): return list(map(func,  input().split()))
+def TUPLE(func=f): return tuple(map(func, input().split()))
+def GRID(n): return [input() for _ in range(n)]
+def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
-# 右のページを読んで理解する https://qiita.com/AkariLuminous/items/32cbf5bc3ffb2f84a898
-# initまでは理解した、次はadd
 
 def segfunc(x, y):
-    return x+y
+    return max(x, y)
 
 
 class SegTree:
@@ -56,13 +73,13 @@ class SegTree:
         return res
 
 
-N = 8
-A = [1, 2, 3, 4, 5, 6, 7, 8]
-a = SegTree([1, 2, 3, 4, 5, 6, 7, 8], segfunc, 0)
-print(a.tree)  # インデックス0は使われていない
-print(a.query(3, 7))
+N, D = MAP(int)
+A = LIST(int)
 
+segtree = SegTree([0]*(5*10**5+1), segfunc, 0)
 
-# 同じセグメントツリーなのに下記のコードの方がコード量が少なくてスマートな気がする
-# 読み解きつつ真似してみる
-# https://atcoder.jp/contests/abc339/submissions/51005845
+for a in A:
+    prev = segtree.query(max(1, a-D), min(5*10**5, a+D)+1)
+    segtree.update(a, prev+1)
+
+print(segtree.query(0, 5*10**5+1))

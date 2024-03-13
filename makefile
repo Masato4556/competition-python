@@ -1,5 +1,5 @@
 make_folder:
-	poetry run python command/make_folder.py -c $(wordlist 2, $(MAKECMDGOALS))
+	poetry run python command/make_folder.py -c $(wordlist 1, $(MAKECMDGOALS))
 fetch:
 	poetry run python command/fetch_testcase.py $(wordlist 2, 3, $(MAKECMDGOALS))
 test:
