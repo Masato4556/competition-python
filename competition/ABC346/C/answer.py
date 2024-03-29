@@ -20,6 +20,13 @@ def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-N = INT()
-N, M = MAP()
-A = LIST()
+N, K = MAP(int)
+A = set(LIST(int))
+
+ans = ((1+K) * K) // 2
+for a in A:
+    if a > K:
+        continue
+    ans -= a
+
+print(ans)

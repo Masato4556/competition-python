@@ -13,13 +13,26 @@ sys.setrecursionlimit(10**9)
 def f(x): return x
 def input(): return sys.stdin.readline().strip()
 def INT(): return int(input())
-def MAP(func=f): return map(func, input().split())
+def MAP(func): return map(func, input().split())
 def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
 def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-N = INT()
-N, M = MAP()
-A = LIST()
+S = input()
+S_uniq = set(S)
+
+ans = comb(len(S), 2)
+duplicatedCharsExists = False
+
+for s in S_uniq:
+    if S.count(s) < 2:
+        continue
+    ans -= comb(S.count(s), 2)
+    duplicatedCharsExists = True
+
+if duplicatedCharsExists:
+    ans += 1
+
+print(ans)
