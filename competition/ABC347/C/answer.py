@@ -14,19 +14,18 @@ def f(x): return x
 def input(): return sys.stdin.readline().strip()
 def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
-def LIST(func=f): return list(map(func, input().split()))
+def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
 def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-N, K = MAP(int)
-A = set(LIST(int))
+N, A, B = MAP(int)
+D = LIST(lambda x: int(x) % (A+B))
 
-ans = ((1+K) * K) // 2
-for a in A:
-    if a > K:
-        continue
-    ans -= a
-
-print(ans)
+if (max(D) - min(D)) < A:
+    print("Yes")
+elif (A+B - max(D) + min(D)) < A:
+    print("Yes")
+else:
+    print("No")

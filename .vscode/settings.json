@@ -3,5 +3,10 @@
     "editor.defaultFormatter": "ms-python.autopep8"
   },
   "python.formatting.provider": "none",
-  "mypy-type-checker.ignorePatterns": ["competition/**/*.py"]
+  "mypy-type-checker.ignorePatterns": [
+    "competition/**/*.py"
+  ],
+  "flake8.args": [
+    "--ignore=F401,E501,E704"
+  ]
 }
