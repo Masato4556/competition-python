@@ -11,15 +11,34 @@ from math import ceil, floor, sqrt, hypot, factorial, pi, sin, cos, tan, asin, a
 INF = float('inf')
 sys.setrecursionlimit(10**9)
 def f(x): return x
-def input(): return sys.stdin.readline().strip()
+# def input(): return sys.stdin.readline().strip()
 def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
 def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
-def GRID(n, func=f): return [LIST(func) for _ in range(n)]
+def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
 N = INT()
-N, M = MAP()
-A = LIST()
+M = ceil(log2(N))
+print(M)
+
+reqs = [list() for _ in range(M)]
+for i in range(N):
+    for j in range(M):
+        if i >> j & 1:
+            reqs[j].append(i+1)
+
+for req in reqs:
+    print(len(req), *req)
+
+S = list(map(int, input()))
+
+ans = 0
+for i in range(M):
+    if S[i] == 0:
+        continue
+    ans += 2**i
+
+print(ans+1)

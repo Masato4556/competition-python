@@ -16,10 +16,56 @@ def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
 def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
-def GRID(n, func=f): return [LIST(func) for _ in range(n)]
+def GRID(n): return [LIST(int) for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-N = INT()
-N, M = MAP()
-A = LIST()
+def rot90(a):
+    return list(zip(*reversed(a)))
+
+
+pats = [
+    [
+        [1, 0, 1],
+        [1, 1, 0],
+        [0, 1, 0]
+    ],
+    [
+        [1, 0, 1],
+        [1, 0, 0],
+        [0, 1, 1]
+    ],
+    [
+        [1, 0, 1],
+        [1, 0, 1],
+        [0, 1, 0]
+    ],
+    [
+        [1, 0, 1],
+        [0, 1, 1],
+        [0, 1, 0]
+    ],
+]
+
+
+def calc(a, pat):
+    Takahashi, Aoki = 0, 0
+    for i in range(3):
+        for j in range(3):
+            if pat[i][j]:
+                Takahashi += a[i][j]
+            else:
+                Aoki += a[i][j]
+    return Takahashi, Aoki
+
+
+A = GRID(3)
+ta_count = 0
+for _ in range(4):
+    for pat in pats:
+        ta, ao = calc(A, pat)
+        ta_count += 1 if ta > ao else 0
+    A = rot90(A)
+
+# print(ta_count)
+print("Takahashi" if ta_count >= 4 else "Aoki")

@@ -16,10 +16,22 @@ def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
 def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
-def GRID(n, func=f): return [LIST(func) for _ in range(n)]
+def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
 N = INT()
-N, M = MAP()
-A = LIST()
+
+counter = defaultdict(int)
+for _ in range(N):
+    S = input()
+    counter[S] += 1
+
+most_common = -1
+for k, v in sorted(counter.items(), key=lambda x: (-x[1], x[0])):
+    if most_common == -1:
+        most_common = v
+
+    if most_common != v:
+        break
+    print(k)

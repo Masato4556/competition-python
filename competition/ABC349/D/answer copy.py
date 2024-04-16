@@ -16,10 +16,46 @@ def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
 def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
-def GRID(n, func=f): return [LIST(func) for _ in range(n)]
+def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-N = INT()
-N, M = MAP()
-A = LIST()
+L, R = MAP(int)
+
+
+def f(l, r):
+    if r - l < 0:
+        print("error", l, r)
+        exit()
+    i = floor(log2(r-l))
+    j = floor(l / (2**i))
+
+    print(l, r, i, j)
+
+    while i >= 0:
+        while not (l <= (2 ** i) * j < r):
+            print(i, j)
+            j += 1
+
+        if l <= (2 ** i) * (j+1) <= r:
+            temp = []
+            print("i:j", i, j)
+            # print("======", l, r)
+            if l != (2 ** i) * j:
+                # print("a", l, (2 ** i) * j)
+                temp.extend(f(l, (2 ** i) * j))
+            temp.append(((2 ** i) * j, (2 ** i) * (j+1)))
+            if (2 ** i) * (j+1) != r:
+                # print("b", (2 ** i) * (j+1), r)
+                temp.extend(f((2 ** i) * (j+1), r))
+            return temp
+
+        i -= 1
+
+    return "error"
+
+
+ans = f(L, R)
+print(len(ans))
+for a in ans:
+    print(*a)

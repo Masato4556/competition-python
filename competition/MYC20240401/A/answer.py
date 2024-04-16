@@ -16,10 +16,14 @@ def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
 def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
-def GRID(n, func=f): return [LIST(func) for _ in range(n)]
+def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-N = INT()
-N, M = MAP()
-A = LIST()
+S = input()
+
+converter = {
+    "SUN": 7, "MON": 6, "TUE": 5, "WED": 4, "THU": 3, "FRI": 2, "SAT": 1
+}
+
+print(converter[S])
