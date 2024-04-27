@@ -14,9 +14,9 @@ def f(x): return x
 def input(): return sys.stdin.readline().strip()
 def INT(): return int(input())
 def MAP(func=f): return map(func, input().split())
-def LIST(func=f): return list(map(func, input().split()))
+def LIST(func=f): return list(map(func,  input().split()))
 def TUPLE(func=f): return tuple(map(func, input().split()))
-def GRID(n): return [input() for _ in range(n)]
+def GRID(n, func=f): return [LIST(func) for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 

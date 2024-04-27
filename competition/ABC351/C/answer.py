@@ -21,5 +21,15 @@ def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
 N = INT()
-N, M = MAP()
-A = LIST()
+A = LIST(int)
+
+que = deque([])
+
+for a in A:
+    cur = a
+    while que and que[-1] == cur:
+        que.pop()
+        cur += 1
+    que.append(cur)
+
+print(len(que))

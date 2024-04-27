@@ -21,5 +21,11 @@ def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
 N = INT()
-N, M = MAP()
-A = LIST()
+A = GRID(N)
+B = GRID(N)
+
+for i in range(N):
+    for j in range(N):
+        if A[i][j] != B[i][j]:
+            print(i+1, j+1)
+            exit()
