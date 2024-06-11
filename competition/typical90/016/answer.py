@@ -5,7 +5,7 @@ from bisect import bisect, bisect_left, insort, insort_left
 from collections import deque, defaultdict, Counter
 from copy import deepcopy
 from functools import lru_cache
-import heapq
+from heapq import heappush, heappop, heapify
 from itertools import accumulate, permutations, combinations, combinations_with_replacement, product, groupby
 from math import ceil, floor, sqrt, hypot, factorial, pi, sin, cos, tan, asin, acos, atan, atan2, radians, degrees, log2, gcd, perm, comb
 INF = float('inf')
@@ -20,42 +20,6 @@ def GRID(n): return [input() for _ in range(n)]
 def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
-def dijkstra(adj_list, start):
-    """
-    adj_list: 隣接リストを表す辞書型データ構造 {u: [(v, cost), ... ], ... }
-    start: 始点の頂点番号
-    """
-    n = len(adj_list)
-    dist = [float('inf')] * n
-    dist[start] = 0
-    heap = [(0, start)]
-    heapq.heapify(heap)
-
-    while heap:
-        d, u = heapq.heappop(heap)
-        if d > dist[u]:
-            continue
-        for v, cost in adj_list[u]:
-            if dist[v] > dist[u] + cost:
-                dist[v] = dist[u] + cost
-                heapq.heappush(heap, (dist[v], v))
-
-    return dist
-
-
-N, M = MAP(int)
-
-G = [set() for _ in range(N)]
-for _ in range(M):
-    a, b, c = MAP(int)
-    a -= 1
-    b -= 1
-    G[a].add((b, c))
-    G[b].add((a, c))
-
-
-cost1 = dijkstra(G, 0)
-cost2 = dijkstra(G, N-1)
-
-for k in range(N):
-    print(cost1[k] + cost2[k])
+N = INT()
+N, M = MAP()
+A = LIST()

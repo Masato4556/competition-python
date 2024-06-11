@@ -21,5 +21,13 @@ def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 
 
 N = INT()
-N, M = MAP()
-A = LIST()
+A = LIST(int)
+B = LIST(int)
+
+A.sort()
+B.sort()
+ans = 0
+for i in range(N):
+    ans += abs(A[i]-B[i])
+
+print(ans)
