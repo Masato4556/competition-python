@@ -23,21 +23,26 @@ def ZIP(n, func=f): return zip(*(MAP(func) for _ in range(n)))
 N = INT()
 coins = LIST(int)
 coins.sort(reverse=True)
-A, B, C = coins
 
+que = [(0, 0)]
 ans = 9999
+while len(que):
+    cur, num = heappop(que)
 
+    mod = (N - cur) % coins[2]
+    div = (N - cur) // coins[2]
 
-for i in range(N//A, -1, -1):
-    n_a = N - A * i
-    if i > ans:
-        break
-    for j in range(min(n_a//B, ans), -1, -1):
-        n_b = n_a - B * j
-        k = n_b // C
-        if i+j+k > ans:
-            break
+    if mod == 0 and num + div < ans:
+        ans = num + div
 
-        if n_b % C == 0:
-            ans = min(ans, i+j+k)
+    if num >= ans:
+        continue
+
+    for i in range(2):
+        nex = cur + coins[i]
+        if nex > N:
+            continue
+        heappush(que, (nex, num+1))
+        print(que)
+
 print(ans)
